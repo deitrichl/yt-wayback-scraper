@@ -5,6 +5,7 @@ using System.Web;
 using System.Windows.Forms;
 using static System.Windows.Forms.LinkLabel;
 using System.Runtime.InteropServices;
+using System.IO;
 
 
 namespace Wayback_Scraper
@@ -27,19 +28,31 @@ namespace Wayback_Scraper
 
             //Confirms that video select list is empty & download list files are deleted on start up
             listBox1.Items.Clear();
-            if (File.Exists(@"..\files\selectF.txt"))
+            if (File.Exists(@".\files\selectF.txt"))
             {
-                File.Delete(@"..\files\selectF.txt");
+                File.Delete(@".\files\selectF.txt");
             };
-            if (File.Exists(@"..\files\select2.txt"))
+            if (File.Exists(@".\files\select2.txt"))
             {
-                File.Delete(@"..\files\select2.txt");
+                File.Delete(@".\files\select2.txt");
             };
 
-            //Checks if save directory file has been made. If not, use default .\videos
-            if (File.Exists(@"..\files\save_directory.txt"))
+            //Create base directories
+            if (!Directory.Exists(@".\files\"))
             {
-                textBox3.Text = File.ReadAllText(@"..\files\save_directory.txt");
+                Directory.CreateDirectory(@".\files\");
+            }
+
+            //Create base directories
+            if (!Directory.Exists(@".\videos\"))
+            {
+                Directory.CreateDirectory(@".\videos\");
+            }
+
+            //Checks if save directory file has been made. If not, use default .\videos
+            if (File.Exists(@".\files\save_directory.txt"))
+            {
+                textBox3.Text = File.ReadAllText(@".\files\save_directory.txt");
             }
             else
             {
@@ -79,20 +92,20 @@ namespace Wayback_Scraper
             int j = 0;
             int k = 0;
 
-            if (File.Exists(@"..\files\dummy1.txt"))
+            if (File.Exists(@".\files\dummy1.txt"))
             {
-                File.Delete(@"..\files\dummy1.txt");
+                File.Delete(@".\files\dummy1.txt");
             };
 
-            if (File.Exists(@"..\files\dummy2.txt"))
+            if (File.Exists(@".\files\dummy2.txt"))
             {
-                File.Delete(@"..\files\dummy2.txt");
+                File.Delete(@".\files\dummy2.txt");
             };
 
 
 
             // Write inputted url to file
-            using (StreamWriter writer = new(@"..\files\new_url1.txt"))
+            using (StreamWriter writer = new(@".\files\new_url1.txt"))
             {
                 writer.WriteLine(textBox1.Text);
             }
@@ -108,21 +121,21 @@ namespace Wayback_Scraper
                      * Then recieve both available and unavailable IDs from playlist, save to url_list2.txt
                      */
                     string strCmdText;
-                    strCmdText = @"/C ""cd ..\ & yt-dlp.exe --get-id -a "".\files\new_url1.txt"" -i > "".\files\url_list1.txt"" & yt-dlp.exe --get-id --flat-playlist -a "".\files\new_url1.txt"" -i > "".\files\url_list2.txt"" & yt-dlp.exe --print id https://www.youtube.com/watch?v=jNQXAC9IVRw > "".\files\dummy1.txt""";
+                    strCmdText = @"/C ""yt-dlp.exe --get-id -a "".\files\new_url1.txt"" -i > "".\files\url_list1.txt"" & yt-dlp.exe --get-id --flat-playlist -a "".\files\new_url1.txt"" -i > "".\files\url_list2.txt"" & yt-dlp.exe --print id https://www.youtube.com/watch?v=jNQXAC9IVRw > "".\files\dummy1.txt""";
                     System.Diagnostics.Process.Start("CMD.exe", strCmdText);
                     Console.Read();
 
                     while (i < 5)
                     {
                         // Get only deleted IDs
-                        if (File.Exists(@"..\files\dummy1.txt"))
+                        if (File.Exists(@".\files\dummy1.txt"))
                         {
-                            var file1Lines = File.ReadAllLines(@"..\files\url_list1.txt");
-                            var file2Lines = File.ReadAllLines(@"..\files\url_list2.txt");
+                            var file1Lines = File.ReadAllLines(@".\files\url_list1.txt");
+                            var file2Lines = File.ReadAllLines(@".\files\url_list2.txt");
                             IEnumerable<String> deleted_ids = file2Lines.Except(file1Lines);
 
                             // Append IDs to file
-                            File.WriteAllLines(@"..\files\del_url1.txt", deleted_ids);
+                            File.WriteAllLines(@".\files\del_url1.txt", deleted_ids);
                             i = 6;
                             break;
                         }
@@ -137,15 +150,15 @@ namespace Wayback_Scraper
 
                             //Convert IDs to Wayback Machine urls
                             List<string> lines = new List<string>();
-                            foreach (var line in File.ReadAllLines(@"..\files\del_url1.txt"))
+                            foreach (var line in File.ReadAllLines(@".\files\del_url1.txt"))
                             {
                                 lines.Add("https://web.archive.org/web/20120523122213/http://wayback-fakeurl.archive.org/yt/" + line);
                             }
 
-                            File.WriteAllLines(@"..\files\del_url2.txt", lines.ToArray());
+                            File.WriteAllLines(@".\files\del_url2.txt", lines.ToArray());
 
                             //Check if deleted videos are on the Wayback Machine and if so download them
-                            strCmdText = @"/C ""cd ..\ & yt-dlp.exe --verbose -ci --batch-file="".\files\del_url2.txt"" -o """ + textBox3.Text + @"""\%(title)s.%(ext)s""";
+                            strCmdText = @"/C ""yt-dlp.exe --verbose -ci --batch-file="".\files\del_url2.txt"" -o """ + textBox3.Text + @"""\%(title)s.%(ext)s""";
                             System.Diagnostics.Process.Start("CMD.exe", strCmdText);
                             Console.Read();
 
@@ -179,28 +192,28 @@ namespace Wayback_Scraper
                         if (query.AllKeys.Contains("v"))
                         {
                             videoId = query["v"];
-                            File.WriteAllText(@"..\files\del_url1.txt", videoId);
+                            File.WriteAllText(@".\files\del_url1.txt", videoId);
 
                         }
                         else
                         {
                             videoId = uri.Segments.Last();
-                            File.WriteAllText(@"..\files\del_url1.txt", videoId);
+                            File.WriteAllText(@".\files\del_url1.txt", videoId);
                         }
 
 
                         //Convert ID to Wayback Machine urls
                         List<string> lines = new List<string>();
-                        foreach (var line in File.ReadAllLines(@"..\files\del_url1.txt"))
+                        foreach (var line in File.ReadAllLines(@".\files\del_url1.txt"))
                         {
                             lines.Add("https://web.archive.org/web/20120523122213/http://wayback-fakeurl.archive.org/yt/" + line);
                         }
 
-                        File.WriteAllLines(@"..\files\del_url2.txt", lines.ToArray());
+                        File.WriteAllLines(@".\files\del_url2.txt", lines.ToArray());
 
                         //Check if deleted video is on the Wayback Machine and if so download it
                         string strCmdText;
-                        strCmdText = @"/C ""cd ..\ & yt-dlp.exe --verbose -ci --batch-file="".\files\del_url2.txt"" -o """ + textBox3.Text + @"""\%(title)s.%(ext)s""";
+                        strCmdText = @"/C ""yt-dlp.exe --verbose -ci --batch-file="".\files\del_url2.txt"" -o """ + textBox3.Text + @"""\%(title)s.%(ext)s""";
                         System.Diagnostics.Process.Start("CMD.exe", strCmdText);
                         Console.Read();
 
@@ -228,21 +241,21 @@ namespace Wayback_Scraper
                      * Then recieve both available and unavailable IDs from playlist, save to url_list2.txt
                      */
                     string strCmdText;
-                    strCmdText = @"/C ""cd ..\ & yt-dlp.exe --get-id -a "".\files\new_url1.txt"" -i > "".\files\url_list1.txt"" & yt-dlp.exe --get-id --flat-playlist -a "".\files\new_url1.txt"" -i > "".\files\url_list2.txt"" & yt-dlp.exe --print id https://www.youtube.com/watch?v=jNQXAC9IVRw > "".\files\dummy1.txt""";
+                    strCmdText = @"/C ""yt-dlp.exe --get-id -a "".\files\new_url1.txt"" -i > "".\files\url_list1.txt"" & yt-dlp.exe --get-id --flat-playlist -a "".\files\new_url1.txt"" -i > "".\files\url_list2.txt"" & yt-dlp.exe --print id https://www.youtube.com/watch?v=jNQXAC9IVRw > "".\files\dummy1.txt""";
                     System.Diagnostics.Process.Start("CMD.exe", strCmdText);
                     Console.Read();
 
                     while (i < 5)
                     {
                         // Get only deleted IDs
-                        if (File.Exists(@"..\files\dummy1.txt"))
+                        if (File.Exists(@".\files\dummy1.txt"))
                         {
-                            var file1Lines = File.ReadAllLines(@"..\files\url_list1.txt");
-                            var file2Lines = File.ReadAllLines(@"..\files\url_list2.txt");
+                            var file1Lines = File.ReadAllLines(@".\files\url_list1.txt");
+                            var file2Lines = File.ReadAllLines(@".\files\url_list2.txt");
                             IEnumerable<String> deleted_ids = file2Lines.Except(file1Lines);
 
                             // Append IDs to file
-                            File.WriteAllLines(@"..\files\del_url1.txt", deleted_ids);
+                            File.WriteAllLines(@".\files\del_url1.txt", deleted_ids);
                             i = 6;
                             break;
                         }
@@ -257,15 +270,15 @@ namespace Wayback_Scraper
 
                             //Convert IDs to Wayback Machine urls
                             List<string> lines = new List<string>();
-                            foreach (var line in File.ReadAllLines(@"..\files\del_url1.txt"))
+                            foreach (var line in File.ReadAllLines(@".\files\del_url1.txt"))
                             {
                                 lines.Add("https://web.archive.org/web/20120523122213/http://wayback-fakeurl.archive.org/yt/" + line);
                             }
 
-                            File.WriteAllLines(@"..\files\del_url2.txt", lines.ToArray());
+                            File.WriteAllLines(@".\files\del_url2.txt", lines.ToArray());
 
                             //Check if deleted videos are on the Wayback Machine and if so, return name and ID
-                            strCmdText = @"/C ""cd ..\ & yt-dlp.exe --verbose -ci --skip-download --print ""%(title)s | %(id)s"" --batch-file="".\files\del_url2.txt"" -i > "".\files\select1.txt"" & yt-dlp.exe --print id https://www.youtube.com/watch?v=jNQXAC9IVRw > "".\files\dummy2.txt""""";
+                            strCmdText = @"/C ""yt-dlp.exe --verbose -ci --skip-download --print ""%(title)s | %(id)s"" --batch-file="".\files\del_url2.txt"" -i > "".\files\select1.txt"" & yt-dlp.exe --print id https://www.youtube.com/watch?v=jNQXAC9IVRw > "".\files\dummy2.txt""""";
                             System.Diagnostics.Process.Start("CMD.exe", strCmdText);
                             Console.Read();
 
@@ -280,23 +293,23 @@ namespace Wayback_Scraper
                     {
                         //Convert only seletable IDS to wayback urls
 
-                        if (File.Exists(@"..\files\dummy2.txt"))
+                        if (File.Exists(@".\files\dummy2.txt"))
                         {
 
                             List<string> lines4 = new List<string>();
 
 
-                            foreach (var line in File.ReadAllLines(@"..\files\select1.txt"))
+                            foreach (var line in File.ReadAllLines(@".\files\select1.txt"))
                             {
                                 listBox1.Items.Add(line);
                                 string lines3 = line.Substring(line.Length - 11);
                                 lines4.Add("https://web.archive.org/web/20120523122213/http://wayback-fakeurl.archive.org/yt/" + lines3);
 
                             }
-                            File.WriteAllLines(@"..\files\select2.txt", lines4.ToArray());
+                            File.WriteAllLines(@".\files\select2.txt", lines4.ToArray());
 
                             //Return error message if no deleted videos are in playlist or on the WM
-                            var info = new FileInfo(@"..\files\select2.txt");
+                            var info = new FileInfo(@".\files\select2.txt");
                             if (info.Length == 0)
                             {
                                 string message = "Deleted videos from this playlist were not found on the Wayback Machine.";
@@ -334,28 +347,28 @@ namespace Wayback_Scraper
                         if (query.AllKeys.Contains("v"))
                         {
                             videoId = query["v"];
-                            File.WriteAllText(@"..\files\del_url1.txt", videoId);
+                            File.WriteAllText(@".\files\del_url1.txt", videoId);
 
                         }
                         else
                         {
                             videoId = uri.Segments.Last();
-                            File.WriteAllText(@"..\files\del_url1.txt", videoId);
+                            File.WriteAllText(@".\files\del_url1.txt", videoId);
                         }
 
 
                         //Convert ID to Wayback Machine urls
                         List<string> lines = new List<string>();
-                        foreach (var line in File.ReadAllLines(@"..\files\del_url1.txt"))
+                        foreach (var line in File.ReadAllLines(@".\files\del_url1.txt"))
                         {
                             lines.Add("https://web.archive.org/web/20120523122213/http://wayback-fakeurl.archive.org/yt/" + line);
                         }
 
-                        File.WriteAllLines(@"..\files\del_url2.txt", lines.ToArray());
+                        File.WriteAllLines(@".\files\del_url2.txt", lines.ToArray());
 
                         //Check if deleted video is on the Wayback Machine and if so, get name and ID
                         string strCmdText;
-                        strCmdText = @"/C ""cd ..\ & yt-dlp.exe --verbose -ci --skip-download --print ""%(title)s | %(id)s"" --batch-file="".\files\del_url2.txt"" -i > "".\files\select1.txt"" & yt-dlp.exe --print id https://www.youtube.com/watch?v=jNQXAC9IVRw > "".\files\dummy2.txt""""";
+                        strCmdText = @"/C ""yt-dlp.exe --verbose -ci --skip-download --print ""%(title)s | %(id)s"" --batch-file="".\files\del_url2.txt"" -i > "".\files\select1.txt"" & yt-dlp.exe --print id https://www.youtube.com/watch?v=jNQXAC9IVRw > "".\files\dummy2.txt""""";
                         System.Diagnostics.Process.Start("CMD.exe", strCmdText);
                         Console.Read();
 
@@ -363,23 +376,23 @@ namespace Wayback_Scraper
                         {
                             //Convert ID back to Wayback URL
 
-                            if (File.Exists(@"..\files\dummy2.txt"))
+                            if (File.Exists(@".\files\dummy2.txt"))
                             {
 
                                 List<string> lines4 = new List<string>();
 
 
-                                foreach (var line in File.ReadAllLines(@"..\files\select1.txt"))
+                                foreach (var line in File.ReadAllLines(@".\files\select1.txt"))
                                 {
                                     listBox1.Items.Add(line);
                                     string lines3 = line.Substring(line.Length - 11);
                                     lines4.Add("https://web.archive.org/web/20120523122213/http://wayback-fakeurl.archive.org/yt/" + lines3);
 
                                 }
-                                File.WriteAllLines(@"..\files\select2.txt", lines4.ToArray());
+                                File.WriteAllLines(@".\files\select2.txt", lines4.ToArray());
 
                                 //If no video is found on WM, return an error message
-                                var info = new FileInfo(@"..\files\select2.txt");
+                                var info = new FileInfo(@".\files\select2.txt");
                                 if (info.Length == 0)
                                 {
                                     string message = "Deleted video was not found on the Wayback Machine.";
@@ -424,7 +437,7 @@ namespace Wayback_Scraper
                 //Stores chosen save directory to file 
                 string sSelectedPath = fbd.SelectedPath;
                 textBox3.Text = sSelectedPath.ToString();
-                File.WriteAllText(@"..\files\save_directory.txt", textBox3.Text);
+                File.WriteAllText(@".\files\save_directory.txt", textBox3.Text);
             }
         }
 
@@ -446,13 +459,13 @@ namespace Wayback_Scraper
             {
                 var index = listBox1.Items.IndexOf(str);
 
-                download_all.Add(File.ReadLines(@"..\files\select2.txt").Skip(index).Take(1).First());
+                download_all.Add(File.ReadLines(@".\files\select2.txt").Skip(index).Take(1).First());
 
             }
-            File.WriteAllLines(@"..\files\selectF.txt", download_all.ToArray());
+            File.WriteAllLines(@".\files\selectF.txt", download_all.ToArray());
 
             string strCmdText;
-            strCmdText = @"/C ""cd ..\ & yt-dlp.exe --verbose -ci --batch-file="".\files\selectF.txt"" -o """ + textBox3.Text + @"""\%(title)s.%(ext)s""";
+            strCmdText = @"/C ""yt-dlp.exe --verbose -ci --batch-file="".\files\selectF.txt"" -o """ + textBox3.Text + @"""\%(title)s.%(ext)s""";
             System.Diagnostics.Process.Start("CMD.exe", strCmdText);
             Console.Read();
         }
@@ -461,7 +474,7 @@ namespace Wayback_Scraper
         {
             //When the button is pressed, download all videos in listBox
             string strCmdText;
-            strCmdText = @"/C ""cd ..\ & yt-dlp.exe --verbose -ci --batch-file="".\files\select2.txt"" -o """ + textBox3.Text + @"""\%(title)s.%(ext)s""";
+            strCmdText = @"/C ""yt-dlp.exe --verbose -ci --batch-file="".\files\select2.txt"" -o """ + textBox3.Text + @"""\%(title)s.%(ext)s""";
             System.Diagnostics.Process.Start("CMD.exe", strCmdText);
             Console.Read();
 
@@ -495,7 +508,7 @@ namespace Wayback_Scraper
         {
             //Update yt-dlp
             string strCmdText;
-            strCmdText = @"/K ""cd ..\ & yt-dlp.exe -U""";
+            strCmdText = @"/K ""yt-dlp.exe -U""";
             System.Diagnostics.Process.Start("CMD.exe", strCmdText);
             Console.Read();
         }
@@ -503,14 +516,14 @@ namespace Wayback_Scraper
         //For opening video directory
         private void button8_Click(object sender, EventArgs e)
         {
-            if (File.Exists(@"..\files\save_directory.txt"))
+            if (File.Exists(@".\files\save_directory.txt"))
             {
                 System.Diagnostics.Process.Start("explorer.exe", @"" + textBox3.Text);
             }
             else
             {
                 string strCmdText;
-                strCmdText = @"/C ""cd ..\videos\ & start .""";
+                strCmdText = @"/C ""cd .\videos\ & start .""";
                 System.Diagnostics.Process.Start("CMD.exe", strCmdText);
                 Console.Read();
             }
