@@ -10,11 +10,9 @@ Using the app is pretty straight forward.
 
 - Enter the url of a deleted YouTube video, or a YouTube playlist that contains deleted videos.
 
-- You may either instantly save all of the found videos instantly by checking the designated box, or you can choose which videos you would like to keep.
+- You may either save all of the found videos instantly by checking the designated box, or you can choose which videos you would like to keep. Submit and wait.
 
-- If you choose the later option, press the submit button and wait as the videos are searched.
-
-- The names and IDs of the videos that are found will be displayed in the box. You can select the ones you want or download them all.
+- If you choose the later option names and IDs of the videos that are found will be displayed in the box. You can select the ones you want or download them all.
 
 - Your downloaded videos will be stored in the folder you chose.
 
@@ -23,5 +21,6 @@ Using the app is pretty straight forward.
   
 ## Downloads
 
-This app requires yt-dlp. A copy is provided in the zip, but it can also be found here: 
-You may update yt-dlp automatically by clicking the update button on the top right.
+This app requires yt-dlp. A copy is provided in the zip, but it can also be found [here.](https://github.com/yt-dlp/yt-dlp) 
+
+You may update yt-dlp automatically by clicking the update button on the top right of the Youtube Wayback Scraper app.
