@@ -1,20 +1,18 @@
-# ![YouTube_Wayback_Scraper](https://github.com/deitrichl/yt-wayback-scratcher/assets/142860321/2f53bdd2-5bd4-428f-85b6-de849575c926)
+# ![](https://user-images.githubusercontent.com/142860321/262550654-35188b5f-af80-4680-9c9b-2a11246402f5.png)
 
 [Download!](https://github.com/deitrichl/yt-wayback-scraper#downloads)
 
-The Youtube Wayback Scraper is an Windows app for the yt-dlp fork that enables the retrieval of deleted Youtube videos, if they are present on the Wayback Machine.
+The Youtube Wayback Scraper is an Windows app for the yt-dlp fork that enables the retrieval of deleted/privated Youtube videos, if they are present on the Wayback Machine.
 
 Using the app is pretty straight forward. 
 
-![2023-08-22 21_15_15-Youtube Wayback Scraper](https://github.com/deitrichl/yt-wayback-scraper/assets/142860321/c161775f-c529-4c95-a8a3-190b2f11eddf)
-
 - Choose the directory that you would like the downloaded videos to be saved to.
 
-- Enter the url of a deleted YouTube video, or a YouTube playlist that contains deleted videos.
+- Enter the url of a unavailable YouTube video, or a YouTube playlist that contains unavailable videos.
 
-- You may either save all of the found videos instantly by checking the designated box, or you can choose which videos you would like to keep. Submit and wait.
+- You may either save all of the found videos instantly by checking the designated box, or you can choose which videos you would like to keep. Hit submit, and wait for the command prompts to finish processing. 
 
-- If you choose the later option names and IDs of the videos that are found will be displayed in the box. You can select the ones you want or download them all.
+- If you did not check the box, the names and IDs of the videos that are found will be displayed in the box. You can select the ones you want or download them all.
 
 - Your downloaded videos will be stored in the folder you chose.
 
