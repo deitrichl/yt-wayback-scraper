@@ -21,6 +21,8 @@ Using the app is pretty straight forward.
   
 ## Downloads
 
+[Click here for the zip containing the application and required files.](https://github.com/deitrichl/yt-wayback-scraper/releases/download/v1.0/yt-wayback-scraper.zip)
+
 This app requires yt-dlp. A copy is provided in the zip, but it can also be found [here.](https://github.com/yt-dlp/yt-dlp) 
 
 You may update yt-dlp automatically by clicking the update button on the top right of the Youtube Wayback Scraper app.
