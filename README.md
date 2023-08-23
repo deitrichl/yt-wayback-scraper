@@ -1,5 +1,7 @@
 # ![YouTube_Wayback_Scraper](https://github.com/deitrichl/yt-wayback-scratcher/assets/142860321/2f53bdd2-5bd4-428f-85b6-de849575c926)
 
+[Download!](https://github.com/deitrichl/yt-wayback-scraper#downloads)
+
 The Youtube Wayback Scraper is an Windows app for the yt-dlp fork that enables the retrieval of deleted Youtube videos, if they are present on the Wayback Machine.
 
 Using the app is pretty straight forward. 
