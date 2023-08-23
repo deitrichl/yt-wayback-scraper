@@ -41,11 +41,11 @@
             textBox1 = new TextBox();
             panel1 = new Panel();
             panel2 = new Panel();
+            button8 = new Button();
             button6 = new Button();
             label1 = new Label();
             label2 = new Label();
             button7 = new Button();
-            button8 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -207,6 +207,21 @@
             panel2.Size = new Size(776, 44);
             panel2.TabIndex = 14;
             // 
+            // button8
+            // 
+            button8.FlatAppearance.BorderColor = Color.DimGray;
+            button8.FlatStyle = FlatStyle.Flat;
+            button8.Image = (Image)resources.GetObject("button8.Image");
+            button8.ImageAlign = ContentAlignment.MiddleLeft;
+            button8.Location = new Point(688, 12);
+            button8.Name = "button8";
+            button8.Size = new Size(65, 23);
+            button8.TabIndex = 5;
+            button8.Text = "Open";
+            button8.TextAlign = ContentAlignment.MiddleRight;
+            button8.UseVisualStyleBackColor = true;
+            button8.Click += button8_Click;
+            // 
             // button6
             // 
             button6.BackColor = Color.Transparent;
@@ -254,21 +269,6 @@
             button7.UseVisualStyleBackColor = true;
             button7.Click += button7_Click;
             // 
-            // button8
-            // 
-            button8.FlatAppearance.BorderColor = Color.DimGray;
-            button8.FlatStyle = FlatStyle.Flat;
-            button8.Image = (Image)resources.GetObject("button8.Image");
-            button8.ImageAlign = ContentAlignment.MiddleLeft;
-            button8.Location = new Point(688, 12);
-            button8.Name = "button8";
-            button8.Size = new Size(65, 23);
-            button8.TabIndex = 5;
-            button8.Text = "Open";
-            button8.TextAlign = ContentAlignment.MiddleRight;
-            button8.UseVisualStyleBackColor = true;
-            button8.Click += button8_Click;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -289,6 +289,7 @@
             Controls.Add(panel1);
             Controls.Add(panel2);
             FormBorderStyle = FormBorderStyle.None;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Youtube Wayback Scraper";
