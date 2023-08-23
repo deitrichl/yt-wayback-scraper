@@ -4,7 +4,9 @@
 
 The Youtube Wayback Scraper is an Windows app for the yt-dlp fork that enables the retrieval of deleted/privated Youtube videos, if they are present on the Wayback Machine.
 
-Using the app is pretty straight forward. 
+Using the app is pretty straight forward.
+
+![](https://user-images.githubusercontent.com/142860321/262555610-e50d0a4b-ec3a-46cc-b17a-386a601268a0.png)
 
 - Choose the directory that you would like the downloaded videos to be saved to.
 
