@@ -32,3 +32,5 @@ Using the app is pretty straight forward.
 This app requires yt-dlp, and ffmpeg for conversions. Copies are provided in the zip, but the links for [yt-dlp](https://github.com/yt-dlp/yt-dlp) and [ffmpeg](https://www.ffmpeg.org/) are as provided.
 
 You may update yt-dlp automatically by clicking the update button on the top right of the Youtube Wayback Scraper app.
+
+Please make sure you have the latest version of [.NET](https://dotnet.microsoft.com/en-us/download)
