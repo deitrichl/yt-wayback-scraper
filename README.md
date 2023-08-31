@@ -10,7 +10,11 @@ Using the app is pretty straight forward.
 
 - Choose the directory that you would like the downloaded videos to be saved to.
 
-- Enter the url of a unavailable YouTube video, or a YouTube playlist that contains unavailable videos.
+- Enter the url or ID of a unavailable YouTube video, or a YouTube playlist that contains unavailable videos. You can also list multiple urls and/or IDs in the search bar, separated by commas(,).
+
+- Alternatively, you can click the upload button and upload a .txt file with a list of urls and/or IDS (one per line).
+
+- The user may switch between video or audio only using the designated box. Select the video quality or file type with the respective boxes, or retrieve the default video type by leaving them unaltered.
 
 - You may either save all of the found videos instantly by checking the designated box, or you can choose which videos you would like to keep. Hit submit, and wait for the command prompts to finish processing. 
 
