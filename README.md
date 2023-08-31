@@ -29,6 +29,6 @@ Using the app is pretty straight forward.
 
 [Click here for the zip containing the application and required files.](https://github.com/deitrichl/yt-wayback-scraper/releases/download/v1.0/yt-wayback-scraper.zip)
 
-This app requires yt-dlp, and ffmpeg for conversions. Copies are provided in the zip, but it can also be found [here.](https://github.com/yt-dlp/yt-dlp) 
+This app requires yt-dlp, and ffmpeg for conversions. Copies are provided in the zip, but the links for [yt-dlp](https://github.com/yt-dlp/yt-dlp) and [ffmpeg](https://www.ffmpeg.org/) are as provided.
 
 You may update yt-dlp automatically by clicking the update button on the top right of the Youtube Wayback Scraper app.
