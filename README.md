@@ -12,7 +12,7 @@ Using the app is pretty straight forward.
 
 - Enter the url or ID of a unavailable YouTube video, or a YouTube playlist that contains unavailable videos. You can also list multiple urls and/or IDs in the search bar, separated by commas(,).
 
-- Alternatively, you can click the upload button and upload a .txt file with a list of urls and/or IDS (one per line).
+- Alternatively, you can click the upload button and upload a .txt file with a list of urls and/or IDs (one per line).
 
 - The user may switch between video or audio only using the designated box. Select the video quality or file type with the respective boxes, or retrieve the default video type by leaving them unaltered.
 
