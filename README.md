@@ -6,7 +6,7 @@ The Youtube Wayback Scraper is an Windows app for the yt-dlp fork that enables t
 
 Using the app is pretty straight forward.
 
-![](https://user-images.githubusercontent.com/142860321/262555610-e50d0a4b-ec3a-46cc-b17a-386a601268a0.png)
+![](https://user-images.githubusercontent.com/142860321/264523360-3d87d8f1-023d-4aab-bba0-9824504c84b1.png)
 
 - Choose the directory that you would like the downloaded videos to be saved to.
 
@@ -29,6 +29,6 @@ Using the app is pretty straight forward.
 
 [Click here for the zip containing the application and required files.](https://github.com/deitrichl/yt-wayback-scraper/releases/download/v1.0/yt-wayback-scraper.zip)
 
-This app requires yt-dlp. A copy is provided in the zip, but it can also be found [here.](https://github.com/yt-dlp/yt-dlp) 
+This app requires yt-dlp, and ffmpeg for conversions. Copies are provided in the zip, but it can also be found [here.](https://github.com/yt-dlp/yt-dlp) 
 
 You may update yt-dlp automatically by clicking the update button on the top right of the Youtube Wayback Scraper app.
