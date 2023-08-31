@@ -27,7 +27,7 @@ Using the app is pretty straight forward.
   
 ## Downloads
 
-[Click here for the zip containing the application and required files.](https://github.com/deitrichl/yt-wayback-scraper/releases/download/v1.0/yt-wayback-scraper.zip)
+[Click here for the latest version.](https://github.com/deitrichl/yt-wayback-scraper/releases/download/v1.1/yt-wayback-scraper-v1.1.zip)
 
 This app requires yt-dlp, and ffmpeg for conversions. Copies are provided in the zip, but the links for [yt-dlp](https://github.com/yt-dlp/yt-dlp) and [ffmpeg](https://www.ffmpeg.org/) are as provided.
 
